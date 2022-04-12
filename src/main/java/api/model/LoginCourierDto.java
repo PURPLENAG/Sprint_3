@@ -1,6 +1,4 @@
-package api;
-
-import org.apache.commons.lang3.RandomStringUtils;
+package api.model;
 
 public class LoginCourierDto {
     private String login;
@@ -28,11 +26,5 @@ public class LoginCourierDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static LoginCourierDto createRandom() {
-        return new LoginCourierDto(
-                RandomStringUtils.randomAlphabetic(10),
-                RandomStringUtils.randomAlphabetic(10));
     }
 }

@@ -1,4 +1,4 @@
-import api.OrderService;
+import api.client.OrderService;
 import org.junit.Test;
 
 import java.util.List;

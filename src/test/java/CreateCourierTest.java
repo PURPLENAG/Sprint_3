@@ -1,8 +1,9 @@
-import api.CourierService;
-import api.RegisterCourierDto;
+import api.client.CourierService;
+import api.model.RegisterCourierDto;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Test;
+import util.DataGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class CreateCourierTest {
 
     @Test
     public void shouldCreateCourier() {
-        register(RegisterCourierDto.createRandom())
+        register(DataGenerator.generateRegisterCourierDto())
                 .then().assertThat()
                 .statusCode(201)
                 .body("ok", equalTo(true));
@@ -50,7 +51,7 @@ public class CreateCourierTest {
 
     @Test
     public void shouldCreateCourierWithoutFirstName() {
-        var dto = RegisterCourierDto.createRandom();
+        var dto = DataGenerator.generateRegisterCourierDto();
         dto.setFirstName(null);
 
         register(dto)
@@ -61,7 +62,7 @@ public class CreateCourierTest {
 
     @Test
     public void shouldNotCreateCourierWithoutLogin() {
-        var dto = RegisterCourierDto.createRandom();
+        var dto = DataGenerator.generateRegisterCourierDto();
         dto.setLogin(null);
 
         register(dto)
@@ -72,7 +73,7 @@ public class CreateCourierTest {
 
     @Test
     public void shouldNotCreateCourierWithoutPassword() {
-        var dto = RegisterCourierDto.createRandom();
+        var dto = DataGenerator.generateRegisterCourierDto();
         dto.setPassword(null);
 
         register(dto)
@@ -83,7 +84,7 @@ public class CreateCourierTest {
 
     @Test
     public void shouldNotCreateTwoEqualsCouriers() {
-        var dto = RegisterCourierDto.createRandom();
+        var dto = DataGenerator.generateRegisterCourierDto();
         register(dto)
                 .then().assertThat()
                 .statusCode(201)
@@ -96,14 +97,14 @@ public class CreateCourierTest {
 
     @Test
     public void shouldNotCreateCourierWithAlreadyExistingLogin() {
-        var dto1 = RegisterCourierDto.createRandom();
+        var dto1 = DataGenerator.generateRegisterCourierDto();
         register(dto1)
                 .then().assertThat()
                 .statusCode(201)
                 .body("ok", equalTo(true));
 
 
-        var dto2 = RegisterCourierDto.createRandom();
+        var dto2 = DataGenerator.generateRegisterCourierDto();
         dto2.setLogin(dto1.getLogin());
         register(dto2)
                 .then().assertThat()

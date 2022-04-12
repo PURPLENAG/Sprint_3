@@ -1,6 +1,4 @@
-package api;
-
-import org.apache.commons.lang3.RandomStringUtils;
+package api.model;
 
 public class RegisterCourierDto {
     private String login;
@@ -38,12 +36,5 @@ public class RegisterCourierDto {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public static RegisterCourierDto createRandom() {
-        return new RegisterCourierDto(
-                RandomStringUtils.randomAlphabetic(10),
-                RandomStringUtils.randomAlphabetic(10),
-                RandomStringUtils.randomAlphabetic(10));
     }
 }

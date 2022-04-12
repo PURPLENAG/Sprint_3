@@ -1,9 +1,9 @@
-import api.CreateOrderDto;
-import api.OrderService;
+import api.client.OrderService;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import util.DataGenerator;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class CreateOrderTest {
     @Parameters(method = "getColorParams")
     @Test
     public void shouldCreateOrderWithVariousColors(List<String> color) {
-        var dto = CreateOrderDto.createRandom();
+        var dto = DataGenerator.generateCreateOrderDto();
         dto.setColor(color);
         OrderService.create(dto)
                 .then().assertThat()

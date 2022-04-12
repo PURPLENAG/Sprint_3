@@ -1,15 +1,7 @@
-package api;
+package api.model;
 
-import org.apache.commons.lang3.RandomUtils;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-import static org.apache.commons.lang3.RandomUtils.nextInt;
 
 public class CreateOrderDto {
     private String firstName;
@@ -93,24 +85,5 @@ public class CreateOrderDto {
     public void setColor(List<String> color) {
         this.color.clear();
         this.color.addAll(color);
-    }
-
-    public static CreateOrderDto createRandom() {
-        var dto = new CreateOrderDto();
-        dto.setFirstName(randomAlphabetic(10));
-        dto.setLastName(randomAlphabetic(10));
-        dto.setAddress(randomAlphabetic(10) + ", " + randomNumeric(1, 3));
-        dto.setMetroStation(nextInt(1, 10));
-        dto.setPhone("+7 " + randomNumeric(3) + " " + randomNumeric(3) + " " + randomNumeric(2) + " " + randomNumeric(2));
-        dto.setRentTime(nextInt(1, 5));
-        dto.setDeliveryDate(LocalDate.now().plusDays(nextInt(1, 5)).format(DateTimeFormatter.ISO_LOCAL_DATE));
-        dto.setComment(randomAlphabetic(10));
-        if (RandomUtils.nextBoolean()) {
-            dto.getColor().add("BLACK");
-        }
-        if (RandomUtils.nextBoolean()) {
-            dto.getColor().add("GREY");
-        }
-        return dto;
     }
 }

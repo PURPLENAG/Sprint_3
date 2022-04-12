@@ -1,10 +1,10 @@
-import api.CourierService;
-import api.LoginCourierDto;
-import api.RegisterCourierDto;
+import api.client.CourierService;
+import api.model.RegisterCourierDto;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import util.DataGenerator;
 
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.equalTo;
@@ -18,7 +18,7 @@ public class LogInCourierTest {
      */
     @Before
     public void before() {
-        courier = RegisterCourierDto.createRandom();
+        courier = DataGenerator.generateRegisterCourierDto();
         CourierService.register(courier)
                 .then().assertThat()
                 .statusCode(201);
@@ -90,7 +90,7 @@ public class LogInCourierTest {
 
     @Test
     public void shouldNotUnregisteredCourierLogIn() {
-        CourierService.login(LoginCourierDto.createRandom())
+        CourierService.login(DataGenerator.generateLoginCourierDto())
                 .then().assertThat()
                 .statusCode(404)
                 .body("message", equalTo("Учетная запись не найдена"));
